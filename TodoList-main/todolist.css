@@ -1,8 +1,8 @@
 :root {
   --primary-color: #1e1e1e;
   --secondary-color: #282828;
-  --accent-color: #007bff;
-  --text-color: #fff;
+  --accent-color: #C8102E;
+  --text-color: #FFF;
   --completed-color: #888;
   --button-color: #333;
 }
@@ -10,7 +10,7 @@
 body.dark {
   --primary-color: #fafafa;
   --secondary-color: #e0e0e0;
-  --accent-color: #0056b3;
+  --accent-color: #C8102E;
   --text-color: #333;
   --completed-color: #555;
   --button-color: #555;
