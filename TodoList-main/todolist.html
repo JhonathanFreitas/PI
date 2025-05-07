@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avengers To-Do List</title>
+  <link rel="stylesheet" href="todolist.css">
+  <script defer src="todolist.js"></script>
+</head>
+<body>
+  <header>
+    <h1>🛡️ Avengers To-Do</h1>
+    <div class="theme-toggle">
+      <button id="toggleTema">🌙 Tema</button>
+    </div>
+    <div class="input-container">
+      <input type="text" id="novoItem" placeholder="Adicionar uma nova tarefa...">
+      <button id="adicionarBtn">Criar ➕</button>
+    </div>
+  </header>
+  
+  <main>
+    <section class="task-list">
+      <div class="task-header">
+        <span>Tarefas Criadas <span id="totalTasks">0</span></span>
+        <span>Concluídas <span id="completedTasks">0</span> de <span id="totalTasks2">0</span></span>
+      </div>
+      <ul id="listaItem"></ul>
+    </section>
+  </main>
+</body>
+</html>

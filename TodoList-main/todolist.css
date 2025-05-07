@@ -1,0 +1,114 @@
+:root {
+  --primary-color: #1e1e1e;
+  --secondary-color: #282828;
+  --accent-color: #007bff;
+  --text-color: #fff;
+  --completed-color: #888;
+  --button-color: #333;
+}
+
+body.dark {
+  --primary-color: #fafafa;
+  --secondary-color: #e0e0e0;
+  --accent-color: #0056b3;
+  --text-color: #333;
+  --completed-color: #555;
+  --button-color: #555;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+header {
+  background-color: var(--secondary-color);
+  padding: 20px;
+  text-align: center;
+  border-bottom: 2px solid var(--accent-color);
+}
+
+header h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.theme-toggle {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 300px;
+  border-radius: 5px;
+  border: 1px solid var(--accent-color);
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+button {
+  padding: 10px 15px;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+main {
+  padding: 20px;
+}
+
+.task-list {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: var(--accent-color);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background-color: var(--secondary-color);
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li span {
+  flex: 1;
+}
+
+li.completed span {
+  text-decoration: line-through;
+  color: var(--completed-color);
+}
+
+li button {
+  margin-left: 5px;
+  background: none;
+  color: var(--text-color);
+  cursor: pointer;
+}
