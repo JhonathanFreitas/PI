@@ -2,6 +2,8 @@ let tasks = [];
 
 function addItem() {
   const input = document.getElementById('novoItem');
+  const categoria = document.getElementById('categoriaItem').value;
+  const prioridade = document.getElementById('prioridadeItem').value;
   const taskText = input.value.trim();
 
   if (taskText === '') {
@@ -11,6 +13,8 @@ function addItem() {
 
   const task = {
     text: taskText,
+    categoria,
+    prioridade,
     completed: false
   };
 
@@ -41,8 +45,10 @@ function atualizarTasks() {
   const lista = document.getElementById('listaItem');
   lista.innerHTML = '';
 
-  let completedCount = 0;
+  const prioridadePeso = { "Alta": 1, "Média": 2, "Baixa": 3 };
+  tasks.sort((a, b) => prioridadePeso[a.prioridade] - prioridadePeso[b.prioridade]);
 
+  let completedCount = 0;
   tasks.forEach((task, index) => {
     const li = document.createElement('li');
     li.classList.toggle('completed', task.completed);
@@ -50,12 +56,11 @@ function atualizarTasks() {
     if (task.completed) completedCount++;
 
     li.innerHTML = `
-      <span>${task.text}</span>
+      <span>${task.text} - (${task.categoria} / Prioridade: ${task.prioridade})</span>
       <button onclick="editItem(${index})">✏️</button>
       <button onclick="toggleTask(${index})">✔️</button>
       <button onclick="removerItem(${index})">🗑️</button>
     `;
-
     lista.appendChild(li);
   });
 
@@ -70,7 +75,6 @@ document.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') addItem();
 });
 
-// Troca de tema
 document.getElementById('toggleTema').addEventListener('click', () => {
   document.body.classList.toggle('dark');
   const temaAtual = document.body.classList.contains('dark') ? 'escuro' : 'claro';
