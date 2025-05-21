@@ -23,7 +23,7 @@ body.tema-escuro {
   padding: 8px 12px;
   border: none;
   border-radius: 8px;
-  background-color: #0062cc;
+  background-color: #C8102E;
   color: white;
   cursor: pointer;
   z-index: 1000;
@@ -133,7 +133,7 @@ header {
 }
 
 .form-tarefa button {
-  background-color: #0062cc;
+  background-color: #C8102E;
   color: white;
   border: none;
   cursor: pointer;
