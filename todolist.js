@@ -68,7 +68,8 @@ function atualizarTasks(filtro = 'Todas', termoBusca = '') {
     filtradas.sort((a, b) => prioridadeOrdem[a.prioridade] - prioridadeOrdem[b.prioridade]);
   }
 
-  filtradas.forEach((task, index) => {
+  filtradas.forEach((task) => {
+    const index = tasks.indexOf(task);
     const li = document.createElement('li');
     li.className = `${task.completed ? 'concluida' : ''} prioridade-${task.prioridade}`;
 
@@ -133,12 +134,6 @@ document.getElementById('temaBtn').addEventListener('click', () => {
   if (body.classList.contains('tema-claro')) {
     body.className = 'tema-escuro';
     temaBtn.textContent = '🌙 Tema Escuro';
-  } else if (body.classList.contains('tema-escuro')) {
-    body.className = 'tema-tech';
-    temaBtn.textContent = '💻 Tema Tech';
-  } else if (body.classList.contains('tema-tech')) {
-    body.className = 'tema-vintage';
-    temaBtn.textContent = '🕰️ Tema Vintage';
   } else {
     body.className = 'tema-claro';
     temaBtn.textContent = '☀️ Tema Claro';
