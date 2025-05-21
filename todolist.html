@@ -1,42 +1,72 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Avengers To-Do List</title>
-  <link rel="stylesheet" href="todolist.css">
-  <script defer src="todolist.js"></script>
+  <link rel="stylesheet" href="todolist.css" />
 </head>
-<body>
-  <header>
-    <h1>🛡️ Avengers To-Do</h1>
-    <div class="theme-toggle">
-      <button id="toggleTema">🌙 Tema</button>
-    </div>
-    <div class="input-container">
-      <input type="text" id="novoItem" placeholder="Adicionar uma nova tarefa...">
-      <select id="categoriaItem">
-        <option value="Estudos">Estudos</option>
-        <option value="Pessoal">Pessoal</option>
-        <option value="Trabalho">Trabalho</option>
-      </select>
-      <select id="prioridadeItem">
-        <option value="Alta">Alta</option>
-        <option value="Média">Média</option>
-        <option value="Baixa">Baixa</option>
-      </select>
-      <button id="adicionarBtn">Criar ➕</button>
-    </div>
-  </header>
-  
-  <main>
-    <section class="task-list">
-      <div class="task-header">
-        <span>Tarefas Criadas <span id="totalTasks">0</span></span>
-        <span>Concluídas <span id="completedTasks">0</span> de <span id="totalTasks2">0</span></span>
+<body class="tema-claro">
+  <div class="container">
+    <aside class="sidebar">
+      <h2>🛡️ Avengers To-Do</h2>
+      <input type="text" id="buscaTarefa" placeholder="🔍 Buscar tarefas..." autocomplete="off" />
+      <nav>
+        <ul>
+          <li id="filtroHoje">🗓️ Hoje</li>
+          <li id="filtroSemana">📆 Semana</li>
+          <li id="filtroTodas">🗃️ Todas</li>
+        </ul>
+      </nav>
+      <div class="category-list">
+        <h3>📂 Categorias</h3>
+        <ul>
+          <li onclick="filtrarCategoria('Estudos')">📚 Estudos</li>
+          <li onclick="filtrarCategoria('Pessoal')">🧘‍♂️ Pessoal</li>
+          <li onclick="filtrarCategoria('Trabalho')">💼 Trabalho</li>
+        </ul>
       </div>
-      <ul id="listaItem"></ul>
-    </section>
-  </main>
+      <div class="ordenar-por">
+        <h3>📌 Ordenar por</h3>
+        <select id="ordenarSelect" onchange="atualizarTasks()">
+          <option value="data">Data</option>
+          <option value="prioridade">Prioridade</option>
+          <option value="nome">Nome</option>
+        </select>
+      </div>
+    </aside>
+
+    <main>
+      <div class="conteudo">
+        <header>
+          <form id="formTarefa" class="form-tarefa">
+            <input type="text" id="novoItem" placeholder="Adicionar uma nova tarefa..." autocomplete="off" />
+            <input type="date" id="dataItem" />
+            <select id="categoriaItem">
+              <option value="Estudos">Estudos</option>
+              <option value="Pessoal">Pessoal</option>
+              <option value="Trabalho">Trabalho</option>
+            </select>
+            <select id="prioridadeItem">
+              <option value="Alta">Alta</option>
+              <option value="Média" selected>Média</option>
+              <option value="Baixa">Baixa</option>
+            </select>
+            <button type="submit" id="adicionarBtn">Adicionar</button>
+          </form>
+          <div id="feedback"></div>
+        </header>
+
+        <section class="task-list">
+          <h3>📝 Tarefas</h3>
+          <ul id="listaItem"></ul>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <button id="temaBtn">☀️ Tema Claro</button>
+
+  <script src="todolist.js"></script>
 </body>
 </html>

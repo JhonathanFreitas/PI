@@ -1,7 +1,11 @@
 let tasks = [];
+let temaAtual = 'claro';
 
-function addItem() {
+function addItem(event) {
+  event.preventDefault();
+
   const input = document.getElementById('novoItem');
+  const data = document.getElementById('dataItem').value;
   const categoria = document.getElementById('categoriaItem').value;
   const prioridade = document.getElementById('prioridadeItem').value;
   const taskText = input.value.trim();
@@ -13,6 +17,7 @@ function addItem() {
 
   const task = {
     text: taskText,
+    data,
     categoria,
     prioridade,
     completed: false
@@ -20,12 +25,63 @@ function addItem() {
 
   tasks.push(task);
   input.value = '';
+  document.getElementById('dataItem').value = '';
+  mostrarFeedback("✅ Tarefa adicionada!");
   atualizarTasks();
 }
 
-function toggleTask(index) {
-  tasks[index].completed = !tasks[index].completed;
-  atualizarTasks();
+function mostrarFeedback(msg) {
+  const feedback = document.getElementById('feedback');
+  feedback.textContent = msg;
+  setTimeout(() => feedback.textContent = '', 2000);
+}
+
+function atualizarTasks(filtro = 'Todas', termoBusca = '') {
+  const lista = document.getElementById('listaItem');
+  lista.innerHTML = '';
+
+  const hoje = new Date();
+  const fimDaSemana = new Date(hoje);
+  fimDaSemana.setDate(hoje.getDate() + 7);
+
+  const ordenacao = document.getElementById('ordenarSelect').value;
+
+  let filtradas = tasks.filter(task => {
+    const correspondeFiltro =
+      filtro === 'Todas' ||
+      (filtro === 'Hoje' && task.data === hoje.toISOString().split('T')[0]) ||
+      (filtro === 'Semana' && task.data && new Date(task.data) <= fimDaSemana) ||
+      task.categoria === filtro;
+
+    const correspondeBusca = task.text.toLowerCase().includes(termoBusca.toLowerCase());
+    return correspondeFiltro && correspondeBusca;
+  });
+
+  if (ordenacao === 'nome') {
+    filtradas.sort((a, b) => a.text.localeCompare(b.text));
+  } else if (ordenacao === 'data') {
+    filtradas.sort((a, b) => new Date(a.data || 0) - new Date(b.data || 0));
+  } else if (ordenacao === 'prioridade') {
+    const prioridadeOrdem = { Alta: 1, Média: 2, Baixa: 3 };
+    filtradas.sort((a, b) => prioridadeOrdem[a.prioridade] - prioridadeOrdem[b.prioridade]);
+  }
+
+  filtradas.forEach((task, index) => {
+    const li = document.createElement('li');
+    li.className = `${task.completed ? 'concluida' : ''} prioridade-${task.prioridade}`;
+
+    li.innerHTML = `
+      <span>
+        <input type="checkbox" onchange="toggleConcluida(${index})" ${task.completed ? 'checked' : ''} />
+        ${task.text} (${task.categoria} - ${task.data || 'Sem data'})
+      </span>
+      <span>
+        <button onclick="editarItem(${index})">✏️</button>
+        <button onclick="removerItem(${index})">🗑️</button>
+      </span>
+    `;
+    lista.appendChild(li);
+  });
 }
 
 function removerItem(index) {
@@ -33,57 +89,51 @@ function removerItem(index) {
   atualizarTasks();
 }
 
-function editItem(index) {
-  const novoTexto = prompt("Edite sua tarefa:", tasks[index].text);
-  if (novoTexto !== null && novoTexto.trim() !== '') {
-    tasks[index].text = novoTexto.trim();
-    atualizarTasks();
-  }
+function editarItem(index) {
+  const novaDescricao = prompt("Editar tarefa:", tasks[index].text);
+  const novaData = prompt("Nova data (AAAA-MM-DD):", tasks[index].data);
+  const novaCategoria = prompt("Nova categoria:", tasks[index].categoria);
+  const novaPrioridade = prompt("Nova prioridade:", tasks[index].prioridade);
+
+  if (novaDescricao?.trim()) tasks[index].text = novaDescricao.trim();
+  if (novaData) tasks[index].data = novaData;
+  if (novaCategoria) tasks[index].categoria = novaCategoria;
+  if (novaPrioridade) tasks[index].prioridade = novaPrioridade;
+
+  atualizarTasks();
 }
 
-function atualizarTasks() {
-  const lista = document.getElementById('listaItem');
-  lista.innerHTML = '';
-
-  const prioridadePeso = { "Alta": 1, "Média": 2, "Baixa": 3 };
-  tasks.sort((a, b) => prioridadePeso[a.prioridade] - prioridadePeso[b.prioridade]);
-
-  let completedCount = 0;
-  tasks.forEach((task, index) => {
-    const li = document.createElement('li');
-    li.classList.toggle('completed', task.completed);
-
-    if (task.completed) completedCount++;
-
-    li.innerHTML = `
-      <span>${task.text} - (${task.categoria} / Prioridade: ${task.prioridade})</span>
-      <button onclick="editItem(${index})">✏️</button>
-      <button onclick="toggleTask(${index})">✔️</button>
-      <button onclick="removerItem(${index})">🗑️</button>
-    `;
-    lista.appendChild(li);
-  });
-
-  document.getElementById('totalTasks').textContent = tasks.length;
-  document.getElementById('totalTasks2').textContent = tasks.length;
-  document.getElementById('completedTasks').textContent = completedCount;
+function toggleConcluida(index) {
+  tasks[index].completed = !tasks[index].completed;
+  atualizarTasks();
 }
 
-document.getElementById('adicionarBtn').addEventListener('click', addItem);
+function filtrarCategoria(categoria) {
+  atualizarTasks(categoria, document.getElementById('buscaTarefa').value);
+}
 
-document.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') addItem();
+document.getElementById('formTarefa').addEventListener('submit', addItem);
+document.getElementById('buscaTarefa').addEventListener('input', () => {
+  atualizarTasks('Todas', document.getElementById('buscaTarefa').value);
 });
 
-document.getElementById('toggleTema').addEventListener('click', () => {
-  document.body.classList.toggle('dark');
-  const temaAtual = document.body.classList.contains('dark') ? 'escuro' : 'claro';
-  localStorage.setItem('tema', temaAtual);
-});
+document.getElementById('filtroHoje').addEventListener('click', () => atualizarTasks('Hoje'));
+document.getElementById('filtroSemana').addEventListener('click', () => atualizarTasks('Semana'));
+document.getElementById('filtroTodas').addEventListener('click', () => atualizarTasks('Todas'));
 
-document.addEventListener('DOMContentLoaded', () => {
-  const temaSalvo = localStorage.getItem('tema');
-  if (temaSalvo === 'escuro') {
-    document.body.classList.add('dark');
+document.getElementById('temaBtn').addEventListener('click', () => {
+  const body = document.body;
+  if (body.classList.contains('tema-claro')) {
+    body.className = 'tema-escuro';
+    temaBtn.textContent = '🌙 Tema Escuro';
+  } else if (body.classList.contains('tema-escuro')) {
+    body.className = 'tema-tech';
+    temaBtn.textContent = '💻 Tema Tech';
+  } else if (body.classList.contains('tema-tech')) {
+    body.className = 'tema-vintage';
+    temaBtn.textContent = '🕰️ Tema Vintage';
+  } else {
+    body.className = 'tema-claro';
+    temaBtn.textContent = '☀️ Tema Claro';
   }
 });
