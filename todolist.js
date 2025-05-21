@@ -24,9 +24,11 @@ function addItem(event) {
   };
 
   tasks.push(task);
+  salvarNoLocalStorage();
   input.value = '';
   document.getElementById('dataItem').value = '';
   mostrarFeedback("✅ Tarefa adicionada!");
+  salvarNoLocalStorage();
   atualizarTasks();
 }
 
@@ -86,6 +88,8 @@ function atualizarTasks(filtro = 'Todas', termoBusca = '') {
 
 function removerItem(index) {
   tasks.splice(index, 1);
+  salvarNoLocalStorage();
+  salvarNoLocalStorage();
   atualizarTasks();
 }
 
@@ -100,11 +104,14 @@ function editarItem(index) {
   if (novaCategoria) tasks[index].categoria = novaCategoria;
   if (novaPrioridade) tasks[index].prioridade = novaPrioridade;
 
+  salvarNoLocalStorage();
   atualizarTasks();
 }
 
 function toggleConcluida(index) {
   tasks[index].completed = !tasks[index].completed;
+  salvarNoLocalStorage();
+  salvarNoLocalStorage();
   atualizarTasks();
 }
 
@@ -137,3 +144,17 @@ document.getElementById('temaBtn').addEventListener('click', () => {
     temaBtn.textContent = '☀️ Tema Claro';
   }
 });
+
+function salvarNoLocalStorage() {
+  localStorage.setItem('avengersTasks', JSON.stringify(tasks));
+}
+
+function carregarDoLocalStorage() {
+  const dados = localStorage.getItem('avengersTasks');
+  if (dados) {
+    tasks = JSON.parse(dados);
+    atualizarTasks();
+  }
+}
+
+carregarDoLocalStorage();
