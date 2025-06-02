@@ -181,6 +181,7 @@ function editarItem(index) {
   const modal = document.createElement('div');
   modal.className = 'modal-edicao';
   modal.innerHTML = `
+    <div class="modal-overlay"></div>
     <div class="modal-conteudo">
       <div class="modal-header">
         <h2>Editar Tarefa</h2>
@@ -188,8 +189,13 @@ function editarItem(index) {
       </div>
       <form id="formEdicao">
         <div class="form-group">
-          <label for="editarDescricao">Descrição</label>
-          <input type="text" id="editarDescricao" value="${task.text}" required>
+          <label for="editarTitulo">Titulo</label>
+          <input type="text" id="editarTitulo" value="${task.text}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="editarTexto">Descrição</label>
+          <textarea id="editarTexto">${task.descricao || ''}</textarea>
         </div>
         
         <div class="form-group">
