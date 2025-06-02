@@ -84,26 +84,77 @@ function atualizarTasks(filtro = 'Todas', termoBusca = '') {
     const li = document.createElement('li');
     li.className = `task-item ${task.completed ? 'concluida' : ''} prioridade-${task.prioridade.toLowerCase()}`;
 
- li.innerHTML = `
-  <label>
-    <input type="checkbox" onchange="toggleConcluida(${tasks.indexOf(task)})" ${task.completed ? 'checked' : ''}>
-    <span class="task-label">
-      ${task.text} (${task.categoria} - ${formatarData(task.data)})
-    </span>
-  </label>
-  <div class="botoes-acoes">
-    <button class="btn-editar" onclick="editarItem(${tasks.indexOf(task)})" title="Editar">
-      <i class="fas fa-pencil-alt"></i>
-    </button>
-    <button class="btn-remover" onclick="removerItem(${tasks.indexOf(task)})" title="Remover">
-      <i class="fas fa-eraser"></i>
-    </button>
-  </div>
-`;
+    li.innerHTML = `
+      <label>
+        <input type="checkbox" onchange="toggleConcluida(${tasks.indexOf(task)})" ${task.completed ? 'checked' : ''}>
+        <span class="task-label">
+          ${task.text} (${task.categoria} - ${formatarData(task.data)})
+        </span>
+      </label>
+      <div class="botoes-acoes">
+        <button class="btn-visualizar" onclick="visualizarItem(${tasks.indexOf(task)})" title="Visualizar">
+          <i class="fas fa-eye"></i>
+        </button>
+        <button class="btn-editar" onclick="editarItem(${tasks.indexOf(task)})" title="Editar">
+          <i class="fas fa-pencil-alt"></i>
+        </button>
+        <button class="btn-remover" onclick="removerItem(${tasks.indexOf(task)})" title="Remover">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </div>
+    `;
 
     lista.appendChild(li);
   });
 }
+
+function visualizarItem(index) {
+  const task = tasks[index];
+  const modal = document.createElement('div');
+  modal.className = 'modal-edicao';
+  modal.innerHTML = `
+    <div class="modal-overlay"></div>
+    <div class="modal-conteudo">
+      <div class="modal-header">
+        <h2>Detalhes da Tarefa</h2>
+        <button class="btn-fechar" onclick="fecharModal()">&times;</button>
+      </div>
+      <div style="padding: 1.5rem;">
+        <p><strong>Título:</strong> ${task.text}</p>
+        <p><strong>Descrição:</strong> ${task.descricao || 'Sem descrição'}</p>
+        <p><strong>Data:</strong> ${formatarData(task.data)}</p>
+        <p><strong>Categoria:</strong> ${task.categoria}</p>
+        <p><strong>Prioridade:</strong> ${task.prioridade}</p>
+        <p><strong>Status:</strong> ${task.completed ? 'Concluída' : 'Pendente'}</p>
+        <div class="modal-footer">
+          <button class="btn btn-cancelar" onclick="fecharModal()">Fechar</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
+// Adiciona suporte ao novo campo de descrição no formulário
+// Supondo que haja um campo <textarea id="descricaoItem"></textarea> no HTML
+
+document.getElementById('formTarefa').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const text = document.getElementById('novoItem').value.trim();
+  const data = document.getElementById('dataItem').value;
+  const categoria = document.getElementById('categoriaItem').value;
+  const prioridade = document.getElementById('prioridadeItem').value;
+  const descricao = document.getElementById('descricaoItem')?.value.trim() || '';
+
+  if (!text) return;
+
+  tasks.push({ text, data, categoria, prioridade, descricao, completed: false });
+  document.getElementById('novoItem').value = '';
+  document.getElementById('dataItem').value = '';
+  if (document.getElementById('descricaoItem')) document.getElementById('descricaoItem').value = '';
+  atualizarTasks();
+});
+
 
 // Formatar data para exibição
 function formatarData(dataString) {
@@ -295,3 +346,4 @@ function fecharSidebar() {
   document.querySelector('.sidebar').classList.remove('aberta');
   document.querySelector('.overlay-sidebar').classList.remove('ativa');
 }
+
