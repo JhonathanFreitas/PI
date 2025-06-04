@@ -696,48 +696,96 @@ header {
   accent-color: var(--cor-primaria);
 }
 
+.logo-topo, .pull-tab, .btn-fechar-menu{
+  display: none;
+}
+
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
     top: 0;
-    left: -80%;
-    width: 80%;
-    max-width: 280px;
-    height: 100%;
-    background-color: #2b2b2b;
-    transition: left 0.3s ease;
-    z-index: 1000;
+    left: 0;
+    width: 65%;
+    height: 100vh;
+    background-color: #121212;
+    color: #fff;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1001;
     overflow-y: auto;
     padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
   }
 
-  .sidebar.aberta {
-    left: 0;
+  .logo-topo, .pull-tab, .btn-fechar-menu{
+    display: block;
   }
 
-  .pull-tab {
+  .logo-topo{
+    height: 40px;
     position: fixed;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    background-color: #C8102E;
-    color: white;
-    padding: 10px;
-    border-radius: 0 8px 8px 0;
-    cursor: pointer;
-    z-index: 1101;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    top: 10px;
+    right: 200px;
+    z-index: 1000;
+  }
+  .sidebar.aberta {
+    transform: translateX(0);
+    z-index: 1200;
   }
 
   .overlay-sidebar {
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.4);
     display: none;
+    z-index: 1000;
   }
 
   .overlay-sidebar.ativa {
     display: block;
   }
+
+  .pull-tab {
+    position: fixed;
+    top: 10px;
+    left: 25px;
+    background-color: #C8102E;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1100;
+    font-size: 1.2rem;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+  }
+
+  .topo-menu-mobile {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+  }
+
+  .btn-fechar-menu {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .btn-fechar-menu:hover {
+    color: #C8102E;
+  }
+
+  .form-tarefa {
+  margin-top: 20px;
+}
+
+.form-tarefa input,
+.form-tarefa select,
+.form-tarefa textarea,
+.form-tarefa button {
+  margin: 8px 4px;
+}
+
 }

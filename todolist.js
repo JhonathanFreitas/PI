@@ -62,7 +62,7 @@ function atualizarTasks(filtro = 'Todas', termoBusca = '') {
     const correspondeFiltro =
       filtro === 'Todas' ||
       (filtro === 'Hoje' && task.data === hoje.toISOString().split('T')[0]) ||
-      (filtro === 'Semana' && task.data && new Date(task.data) <= fimDaSemana) ||
+      (filtro === 'Semana' && task.data && task.data <= fimDaSemana.toISOString().split('T')[0]) ||
       task.categoria === filtro;
 
     const correspondeBusca = task.text.toLowerCase().includes(termoBusca.toLowerCase());
@@ -73,7 +73,7 @@ function atualizarTasks(filtro = 'Todas', termoBusca = '') {
   if (ordenacao === 'nome') {
     filtradas.sort((a, b) => a.text.localeCompare(b.text));
   } else if (ordenacao === 'data') {
-    filtradas.sort((a, b) => new Date(a.data || 0) - new Date(b.data || 0));
+    filtradas.sort((a, b) => (a.data || '').localeCompare(b.data || ''));
   } else if (ordenacao === 'prioridade') {
     const prioridadeOrdem = { Alta: 1, Média: 2, Baixa: 3 };
     filtradas.sort((a, b) => prioridadeOrdem[a.prioridade] - prioridadeOrdem[b.prioridade]);
@@ -159,8 +159,10 @@ document.getElementById('formTarefa').addEventListener('submit', function(e) {
 // Formatar data para exibição
 function formatarData(dataString) {
   if (!dataString) return 'Sem data';
-  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-  return new Date(dataString).toLocaleDateString('pt-BR', options);
+  const partes = dataString.split('-');
+  if (partes.length !== 3) return dataString;
+  const [ano, mes, dia] = partes;
+  return `${dia}/${mes}/${ano}`;
 }
 
 // Remover item
@@ -240,23 +242,25 @@ function editarItem(index) {
   `
   
   document.body.appendChild(modal);
-  document.getElementById('editarDescricao').focus();
+  document.getElementById('editarTexto').focus();
   
   // Evento do formulário
   document.getElementById('formEdicao').addEventListener('submit', (e) => {
     e.preventDefault();
     
-    const novaDescricao = document.getElementById('editarDescricao').value.trim();
+    const novoTitulo = document.getElementById('editarTitulo').value.trim();
+    const novaDescricao = document.getElementById('editarTexto').value.trim();
     const novaData = document.getElementById('editarData').value;
     const novaCategoria = document.getElementById('editarCategoria').value;
     const novaPrioridade = document.querySelector('input[name="editarPrioridade"]:checked').value;
-    
-    if (novaDescricao) {
-      tasks[index].text = novaDescricao;
+
+    if (novoTitulo) {
+      tasks[index].text = novoTitulo;
+      tasks[index].descricao = novaDescricao;
       tasks[index].data = novaData;
       tasks[index].categoria = novaCategoria;
       tasks[index].prioridade = novaPrioridade;
-      
+
       salvarNoLocalStorage();
       atualizarTasks();
       fecharModal();
@@ -310,6 +314,12 @@ function alternarTema() {
     temaBtn.textContent = '☀️ Tema Claro';
     temaAtual = 'claro';
   }
+  const logo = document.getElementById('logoTopo');
+  if (temaAtual === 'escuro') {
+    logo.src = 'logo-branca.png';
+  } else {
+    logo.src = 'logo.png';
+  }
   salvarTemaNoLocalStorage();
 }
 
@@ -323,6 +333,12 @@ function carregarTemaDoLocalStorage() {
     temaAtual = temaSalvo;
     document.body.className = temaSalvo === 'escuro' ? 'tema-escuro' : 'tema-claro';
     temaBtn.textContent = temaSalvo === 'escuro' ? '🌙 Tema Escuro' : '☀️ Tema Claro';
+  }
+  const logo = document.getElementById('logoTopo');
+  if (temaAtual === 'escuro') {
+    logo.src = 'logo-branca.png';
+  } else {
+    logo.src = 'logo.png';
   }
 }
 
@@ -352,4 +368,3 @@ function fecharSidebar() {
   document.querySelector('.sidebar').classList.remove('aberta');
   document.querySelector('.overlay-sidebar').classList.remove('ativa');
 }
-
