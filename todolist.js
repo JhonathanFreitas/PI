@@ -16,7 +16,7 @@ function addItem(event) {
     mostrarFeedback("⚠️ Por favor, insira uma tarefa.");
     return;
   }
-  // Cria uma nova tarefa e adiciona  ela na lista
+  // Cria uma nova tarefa e adiciona na lista
   const task = {
     text: taskText,
     data,
@@ -113,7 +113,7 @@ function atualizarTasks(filtro = 'Todas', termoBusca = '') {
 // Função para visualizar os detalhes de uma tarefa
 function visualizarItem(index) {
   const task = tasks[index];
-  const modal = document.createElement('div'); // Cria uma modal para exibir os detalhes
+  const modal = document.createElement('div'); 
   modal.className = 'modal-edicao';
   modal.innerHTML = `
     <div class="modal-overlay"></div>
@@ -169,7 +169,7 @@ function formatarData(dataString) {
 }
 
 // Remover item
-function removerItem(index) { // Funcao para remover os itens do todo-list
+function removerItem(index) {
   if (confirm('Tem certeza que deseja remover esta tarefa?')) {
     tasks.splice(index, 1);
     salvarNoLocalStorage();
@@ -182,7 +182,7 @@ function removerItem(index) { // Funcao para remover os itens do todo-list
 function editarItem(index) {
   const task = tasks[index];
   
-  // Criar modal para edicao das tarefas
+  // Criar modal
   const modal = document.createElement('div');
   modal.className = 'modal-edicao';
   modal.innerHTML = `
@@ -326,21 +326,17 @@ function alternarTema() {
   salvarTemaNoLocalStorage();
 }
 
-f// Salva o tema atual (claro ou escuro) no localStorage
 function salvarTemaNoLocalStorage() {
-  localStorage.setItem('temaAvengers', temaAtual);  // Armazena o tema escolhido
+  localStorage.setItem('temaAvengers', temaAtual);
 }
 
-// Carrega o tema salvo do localStorage quando a página for aberta
 function carregarTemaDoLocalStorage() {
   const temaSalvo = localStorage.getItem('temaAvengers');
   if (temaSalvo) {
-    temaAtual = temaSalvo;  // Define o tema salvo como o tema atual
+    temaAtual = temaSalvo;
     document.body.className = temaSalvo === 'escuro' ? 'tema-escuro' : 'tema-claro';
     temaBtn.textContent = temaSalvo === 'escuro' ? '🌙 Tema Escuro' : '☀️ Tema Claro';
   }
-
-  // Troca o logo dependendo do tema
   const logo = document.getElementById('logoTopo');
   if (temaAtual === 'escuro') {
     logo.src = 'logo-branca.png';
@@ -349,37 +345,29 @@ function carregarTemaDoLocalStorage() {
   }
 }
 
-
-// Quando a página for carregada, faz várias coisas:
+// Event Listeners
 document.addEventListener('DOMContentLoaded', function() {
-  carregarDoLocalStorage();  // Carrega as tarefas salvas
-  carregarTemaDoLocalStorage();  // Carrega o tema salvo
-
-  // Quando o formulário for enviado, adiciona a tarefa
+  carregarDoLocalStorage();
+  carregarTemaDoLocalStorage();
+  
   document.getElementById('formTarefa').addEventListener('submit', addItem);
-
-  // Ao digitar no campo de busca, filtra as tarefas automaticamente
   document.getElementById('buscaTarefa').addEventListener('input', () => {
     atualizarTasks('Todas', document.getElementById('buscaTarefa').value);
   });
-
-  // Botões para aplicar filtros de tarefas por data
+  
   document.getElementById('filtroHoje').addEventListener('click', () => atualizarTasks('Hoje'));
   document.getElementById('filtroSemana').addEventListener('click', () => atualizarTasks('Semana'));
   document.getElementById('filtroTodas').addEventListener('click', () => atualizarTasks('Todas'));
-
-  // Botão para trocar o tema claro/escuro
+  
   document.getElementById('temaBtn').addEventListener('click', alternarTema);
 });
 
-// Abre o menu lateral
 function abrirSidebar() {
-  document.querySelector('.sidebar').classList.add('aberta');  // Adiciona a classe "aberta"
-  document.querySelector('.overlay-sidebar').classList.add('ativa');  // Ativa o fundo escurecido
+  document.querySelector('.sidebar').classList.add('aberta');
+  document.querySelector('.overlay-sidebar').classList.add('ativa');
 }
 
-// Fecha o menu lateral
 function fecharSidebar() {
-  document.querySelector('.sidebar').classList.remove('aberta');  // Remove a classe "aberta"
-  document.querySelector('.overlay-sidebar').classList.remove('ativa');  // Remove o fundo escurecido
+  document.querySelector('.sidebar').classList.remove('aberta');
+  document.querySelector('.overlay-sidebar').classList.remove('ativa');
 }
