@@ -47,21 +47,43 @@
       <div class="conteudo">
         <header>
           <form id="formTarefa" class="form-tarefa">
-            <input type="text" id="novoItem" placeholder="Adicionar uma nova tarefa..." autocomplete="off" />
-            <textarea type="descricao" id="descricaoItem" placeholder="Descrição da tarefa..."></textarea>
-            <input type="date" id="dataItem" />
-            <select id="categoriaItem">
-              <option value="Estudos">Estudos</option>
-              <option value="Pessoal">Pessoal</option>
-              <option value="Trabalho">Trabalho</option>
-            </select>
-            <select id="prioridadeItem">
-              <option value="Alta">Alta</option>
-              <option value="Média" selected>Média</option>
-              <option value="Baixa">Baixa</option>
-            </select>
-            <button type="submit" id="adicionarBtn">Adicionar</button>
-          </form>
+  <div class="campo-form">
+    <label for="novoItem">Título da tarefa</label>
+    <input type="text" id="novoItem" placeholder="Adicionar uma nova tarefa..." />
+  </div>
+
+  <div class="campo-form">
+    <label for="descricaoItem">Descrição da tarefa</label>
+    <textarea id="descricaoItem" placeholder="Descrição da tarefa..."></textarea>
+  </div>
+
+  <div class="linha-campos">
+    <div class="campo-form">
+      <label for="dataItem">Data da tarefa</label>
+      <input type="date" id="dataItem" />
+    </div>
+
+    <div class="campo-form">
+      <label for="categoriaItem">Categoria da tarefa</label>
+      <select id="categoriaItem">
+        <option value="Estudos">Estudos</option>
+        <option value="Pessoal">Pessoal</option>
+        <option value="Trabalho">Trabalho</option>
+      </select>
+    </div>
+
+    <div class="campo-form">
+      <label for="prioridadeItem">Prioridade da tarefa</label>
+      <select id="prioridadeItem">
+        <option value="Alta">Alta</option>
+        <option value="Média" selected>Média</option>
+        <option value="Baixa">Baixa</option>
+      </select>
+    </div>
+  </div>
+
+  <button type="submit" id="adicionarBtn">Adicionar</button>
+</form>
           <div id="feedback"></div>
         </header>
 

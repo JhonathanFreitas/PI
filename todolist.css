@@ -147,6 +147,49 @@ header {
   margin: 5px;
 }
 
+label{
+  padding-left: 5px;
+}
+
+.form-tarefa {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.campo-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.campo-form label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  color: inherit;
+}
+
+.campo-form input,
+.campo-form select,
+.campo-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.linha-campos {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.linha-campos .campo-form {
+  flex: 1;
+  min-width: 200px;
+}
+
 .form-tarefa .linha-campos {
   display: flex;
   gap: 10px;
