@@ -8,11 +8,16 @@
   <link rel="stylesheet" href="todolist.css" />
 </head>
 <body class="tema-claro">
+  <div class="top-bar-fixa">
+      <div class="pull-tab" onclick="abrirSidebar()">☰</div>
+      <div class="top-bar"><img src="logo-branca.png" alt="Logo" class="logo-topo" id="logoTopo"></div>
+      
+  </div>
   <div class="container">
     <aside class="sidebar">
-    <div class="topo-menu-mobile">
-      <button class="btn-fechar-menu" onclick="fecharSidebar()">✕</button>
-    </div>
+      <div class="topo-menu-mobile">
+        <button class="btn-fechar-menu" onclick="fecharSidebar()">✕</button>
+      </div>
       <h2 class="logo-header">
         <img src="logo-branca.png" alt="Logo Avengers To-Do" class="logo-img">
         Avengers To-Do
@@ -44,8 +49,8 @@
     </aside>
 
     <main>
-      <div class="conteudo">
-        <header>
+      <section class="conteudo">
+        <div>
           <form id="formTarefa" class="form-tarefa">
             <div class="campo-form">
               <label for="novoItem">Título da tarefa</label>
@@ -81,20 +86,18 @@
             <button type="submit" id="adicionarBtn">Adicionar</button>
           </form>
           <div id="feedback"></div>
-        </header>
+        </div>
         <section class="task-list">
           <h3>📝 Tarefas</h3>
           <ul id="listaItem"></ul>
         </section>
-      </div>
+      </section>
     </main>
   </div>
 
-  <button id="temaBtn">☀️ Tema Claro</button>
+  <button id="temaBtn">☀️</button>
+  <div class="overlay-sidebar" onclick="fecharSidebar()"></div>
 
   <script src="todolist.js"></script>
 </body>
-<div class="pull-tab" onclick="abrirSidebar()">☰</div>
-<div class="overlay-sidebar" onclick="fecharSidebar()"></div>
-<div class="top-bar"><img src="logo-branca.png" alt="Logo" class="logo-topo" id="logoTopo"></div>
 </html>

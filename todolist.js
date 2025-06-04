@@ -308,13 +308,13 @@ function carregarDoLocalStorage() {
 // Alternar tema
 function alternarTema() {
   const body = document.body;
-  if (body.classList.contains('tema-claro')) {
+  if (body.classList.contains('☀️')) {
     body.className = 'tema-escuro';
-    temaBtn.textContent = '🌙 Tema Escuro';
+    temaBtn.textContent = '🌙 ';
     temaAtual = 'escuro';
   } else {
-    body.className = 'tema-claro';
-    temaBtn.textContent = '☀️ Tema Claro';
+    body.className = '☀️';
+    temaBtn.textContent = '☀️';
     temaAtual = 'claro';
   }
   const logo = document.getElementById('logoTopo');
@@ -334,8 +334,8 @@ function carregarTemaDoLocalStorage() {
   const temaSalvo = localStorage.getItem('temaAvengers');
   if (temaSalvo) {
     temaAtual = temaSalvo;
-    document.body.className = temaSalvo === 'escuro' ? 'tema-escuro' : 'tema-claro';
-    temaBtn.textContent = temaSalvo === 'escuro' ? '🌙 Tema Escuro' : '☀️ Tema Claro';
+    document.body.className = temaSalvo === 'escuro' ? '🌙' : '☀️';
+    temaBtn.textContent = temaSalvo === 'escuro' ? '🌙' : '☀️';
   }
   const logo = document.getElementById('logoTopo');
   if (temaAtual === 'escuro') {
