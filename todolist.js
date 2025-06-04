@@ -5,17 +5,18 @@ let temaAtual = 'claro';
 function addItem(event) {
   event.preventDefault();
 
+// Pega os valores que o usuário inseriu nos campos de input
   const input = document.getElementById('novoItem');
   const data = document.getElementById('dataItem').value;
   const categoria = document.getElementById('categoriaItem').value;
   const prioridade = document.getElementById('prioridadeItem').value;
   const taskText = input.value.trim();
 
-  if (taskText === '') {
+  if (taskText === '') {  // Se não tiver texto,  vai exibir uma mensagem de alerta na tela
     mostrarFeedback("⚠️ Por favor, insira uma tarefa.");
     return;
   }
-
+  // Cria uma nova tarefa e adiciona  ela na lista
   const task = {
     text: taskText,
     data,
@@ -25,7 +26,7 @@ function addItem(event) {
   };
 
   tasks.push(task);
-  salvarNoLocalStorage();
+  salvarNoLocalStorage();  // Salva a lista de tarefas no armazenamento local
   input.value = '';
   document.getElementById('dataItem').value = '';
   mostrarFeedback("✅ Tarefa adicionada!");
@@ -52,6 +53,7 @@ function atualizarTasks(filtro = 'Todas', termoBusca = '') {
   const lista = document.getElementById('listaItem');
   lista.innerHTML = '';
 
+// Calcula a data de uma semana a partir de hoje
   const hoje = new Date();
   const fimDaSemana = new Date(hoje);
   fimDaSemana.setDate(hoje.getDate() + 7);
@@ -108,9 +110,10 @@ function atualizarTasks(filtro = 'Todas', termoBusca = '') {
   });
 }
 
+// Função para visualizar os detalhes de uma tarefa
 function visualizarItem(index) {
   const task = tasks[index];
-  const modal = document.createElement('div');
+  const modal = document.createElement('div'); // Cria uma modal para exibir os detalhes
   modal.className = 'modal-edicao';
   modal.innerHTML = `
     <div class="modal-overlay"></div>
@@ -166,7 +169,7 @@ function formatarData(dataString) {
 }
 
 // Remover item
-function removerItem(index) {
+function removerItem(index) { // Funcao para remover os itens do todo-list
   if (confirm('Tem certeza que deseja remover esta tarefa?')) {
     tasks.splice(index, 1);
     salvarNoLocalStorage();
@@ -179,7 +182,7 @@ function removerItem(index) {
 function editarItem(index) {
   const task = tasks[index];
   
-  // Criar modal
+  // Criar modal para edicao das tarefas
   const modal = document.createElement('div');
   modal.className = 'modal-edicao';
   modal.innerHTML = `
@@ -323,17 +326,21 @@ function alternarTema() {
   salvarTemaNoLocalStorage();
 }
 
+f// Salva o tema atual (claro ou escuro) no localStorage
 function salvarTemaNoLocalStorage() {
-  localStorage.setItem('temaAvengers', temaAtual);
+  localStorage.setItem('temaAvengers', temaAtual);  // Armazena o tema escolhido
 }
 
+// Carrega o tema salvo do localStorage quando a página for aberta
 function carregarTemaDoLocalStorage() {
   const temaSalvo = localStorage.getItem('temaAvengers');
   if (temaSalvo) {
-    temaAtual = temaSalvo;
+    temaAtual = temaSalvo;  // Define o tema salvo como o tema atual
     document.body.className = temaSalvo === 'escuro' ? 'tema-escuro' : 'tema-claro';
     temaBtn.textContent = temaSalvo === 'escuro' ? '🌙 Tema Escuro' : '☀️ Tema Claro';
   }
+
+  // Troca o logo dependendo do tema
   const logo = document.getElementById('logoTopo');
   if (temaAtual === 'escuro') {
     logo.src = 'logo-branca.png';
@@ -342,29 +349,37 @@ function carregarTemaDoLocalStorage() {
   }
 }
 
-// Event Listeners
+
+// Quando a página for carregada, faz várias coisas:
 document.addEventListener('DOMContentLoaded', function() {
-  carregarDoLocalStorage();
-  carregarTemaDoLocalStorage();
-  
+  carregarDoLocalStorage();  // Carrega as tarefas salvas
+  carregarTemaDoLocalStorage();  // Carrega o tema salvo
+
+  // Quando o formulário for enviado, adiciona a tarefa
   document.getElementById('formTarefa').addEventListener('submit', addItem);
+
+  // Ao digitar no campo de busca, filtra as tarefas automaticamente
   document.getElementById('buscaTarefa').addEventListener('input', () => {
     atualizarTasks('Todas', document.getElementById('buscaTarefa').value);
   });
-  
+
+  // Botões para aplicar filtros de tarefas por data
   document.getElementById('filtroHoje').addEventListener('click', () => atualizarTasks('Hoje'));
   document.getElementById('filtroSemana').addEventListener('click', () => atualizarTasks('Semana'));
   document.getElementById('filtroTodas').addEventListener('click', () => atualizarTasks('Todas'));
-  
+
+  // Botão para trocar o tema claro/escuro
   document.getElementById('temaBtn').addEventListener('click', alternarTema);
 });
 
+// Abre o menu lateral
 function abrirSidebar() {
-  document.querySelector('.sidebar').classList.add('aberta');
-  document.querySelector('.overlay-sidebar').classList.add('ativa');
+  document.querySelector('.sidebar').classList.add('aberta');  // Adiciona a classe "aberta"
+  document.querySelector('.overlay-sidebar').classList.add('ativa');  // Ativa o fundo escurecido
 }
 
+// Fecha o menu lateral
 function fecharSidebar() {
-  document.querySelector('.sidebar').classList.remove('aberta');
-  document.querySelector('.overlay-sidebar').classList.remove('ativa');
+  document.querySelector('.sidebar').classList.remove('aberta');  // Remove a classe "aberta"
+  document.querySelector('.overlay-sidebar').classList.remove('ativa');  // Remove o fundo escurecido
 }
