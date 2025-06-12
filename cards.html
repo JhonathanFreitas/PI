@@ -336,11 +336,11 @@
       const logo = document.getElementById('logo-img');
       if (body.classList.contains('tema-claro')) {
           body.className = 'tema-escuro';
-          temaBtn.textContent = '🌙 Tema Escuro';
+          temaBtn.textContent = '🌙 ';
           logo.src = 'logo-branca.png';
       } else {
           body.className = 'tema-claro';
-          temaBtn.textContent = '☀️ Tema Claro';
+          temaBtn.textContent = '☀️ ';
           logo.src = 'logo.png';
       }
       localStorage.setItem('temaAvengers', body.classList.contains('tema-escuro') ? 'escuro' : 'claro');
