@@ -7,22 +7,40 @@
   <title>Avengers To-Do List</title>
   <link rel="stylesheet" href="todolist.css" />
 </head>
-<body class="tema-claro">
-  <div class="top-bar-fixa">
-      <div class="pull-tab" onclick="abrirSidebar()">☰</div>
-      <div class="top-bar"><img src="logo-branca.png" alt="Logo" class="logo-topo" id="logoTopo"></div>
-      
-  </div>
+<body class="tema-escuro">
+
+  <header class="main-header">
+    <div class="pull-tab" onclick="abrirSidebar()">☰</div>
+    <div class="header-logo-mobile">
+        <img src="logo-branca.png" alt="Logo" class="logo-topo" id="logoTopoMobile">
+        <span>Avengers To-Do</span>
+    </div>
+    <button id="temaBtnMobile" class="tema-btn-mobile" onclick="alternarTema()">🌙</button>
+  </header>
+  
+  <button id="temaBtnDesktop" class="tema-btn-desktop" onclick="alternarTema()">🌙 Tema Escuro</button>
+
+
   <div class="container">
     <aside class="sidebar">
       <div class="topo-menu-mobile">
         <button class="btn-fechar-menu" onclick="fecharSidebar()">✕</button>
       </div>
       <h2 class="logo-header">
-        <img src="logo-branca.png" alt="Logo Avengers To-Do" class="logo-img">
-        Avengers To-Do
+        <a href="cards.html" class="logo-link">
+          <img src="logo-branca.png" alt="Logo Avengers To-Do" class="logo-img" id="logoSidebar">
+          <span>Avengers To-Do</span>
+        </a>
       </h2>
-      <input type="text" id="buscaTarefa" placeholder="🔍 Buscar tarefas..." autocomplete="off" />
+      
+      <div class="sidebar-actions">
+        <a href="cards.html" class="sidebar-action-button"><i class="fas fa-th-large"></i> Dashboard</a>
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="buscaTarefa" placeholder="Buscar tarefas..." autocomplete="off" />
+        </div>
+      </div>
+
       <nav>
         <ul>
           <li id="filtroHoje">🗓️ Hoje</li>
@@ -41,7 +59,7 @@
       <div class="ordenar-por">
         <h3>📌 Ordenar por</h3>
         <select id="ordenarSelect" onchange="atualizarTasks()">
-          <option value="data">Data</option>
+          <option value="data" selected>Data</option>
           <option value="prioridade">Prioridade</option>
           <option value="nome">Nome</option>
         </select>
@@ -49,55 +67,71 @@
     </aside>
 
     <main>
-      <section class="conteudo">
-        <div>
-          <form id="formTarefa" class="form-tarefa">
-            <div class="campo-form">
-              <label for="novoItem">Título da tarefa</label>
-              <input type="text" id="novoItem" placeholder="Adicionar uma nova tarefa..." />
-            </div>
-            <div class="campo-form">
-              <label for="descricaoItem">Descrição da tarefa</label>
-              <textarea id="descricaoItem" placeholder="Descrição da tarefa..."></textarea>
-            </div>
-            <div class="linha-campos">
-              <div class="campo-form">
-                <label for="dataItem">Data da tarefa</label>
-                <input type="date" id="dataItem" />
-              </div>
-
-              <div class="campo-form">
-                <label for="categoriaItem">Categoria da tarefa</label>
-                <select id="categoriaItem">
-                  <option value="Estudos">Estudos</option>
-                  <option value="Pessoal">Pessoal</option>
-                  <option value="Trabalho">Trabalho</option>
-                </select>
-              </div>
-              <div class="campo-form">
-                <label for="prioridadeItem">Prioridade da tarefa</label>
-                <select id="prioridadeItem">
-                  <option value="Alta">Alta</option>
-                  <option value="Média" selected>Média</option>
-                  <option value="Baixa">Baixa</option>
-                </select>
-              </div>
-            </div>
-            <button type="submit" id="adicionarBtn">Adicionar</button>
-          </form>
+      <div class="conteudo">
+        <header class="conteudo-header">
+          <div class="add-task-container">
+            <button id="abrirModalAdicionarBtn" class="btn-add-task">
+              <i class="fas fa-plus"></i> Adicionar Nova Tarefa
+            </button>
+          </div>
           <div id="feedback"></div>
-        </div>
+        </header>
         <section class="task-list">
-          <h3>📝 Tarefas</h3>
+          <h3>📝 Minhas Tarefas</h3>
           <ul id="listaItem"></ul>
         </section>
-      </section>
+      </div>
     </main>
   </div>
 
-  <button id="temaBtn">☀️</button>
-  <div class="overlay-sidebar" onclick="fecharSidebar()"></div>
+  <div class="modal-edicao" id="modalAdicionar" style="display: none;">
+    <div class="modal-overlay" onclick="fecharModalAdicionar()"></div>
+    <div class="modal-conteudo">
+      <div class="modal-header">
+        <h2>Adicionar Nova Tarefa</h2>
+        <button class="btn-fechar" onclick="fecharModalAdicionar()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="formAdicionar">
+          <div class="form-group">
+            <label for="addTitulo">Título</label>
+            <input type="text" id="addTitulo" class="form-control" placeholder="Ex: Estudar JavaScript" required>
+          </div>
+          <div class="form-group">
+            <label for="addDescricao">Descrição</label>
+            <textarea id="addDescricao" class="form-control" placeholder="Ex: Revisar os módulos sobre DOM..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="addData">Data</label>
+            <input type="date" id="addData" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="addCategoria">Categoria</label>
+            <select id="addCategoria" class="form-control">
+              <option value="Estudos">Estudos</option>
+              <option value="Pessoal">Pessoal</option>
+              <option value="Trabalho">Trabalho</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Prioridade</label>
+            <div class="prioridade-opcoes">
+              <label class="prioridade-option alta"><input type="radio" name="addPrioridade" value="Alta"><span>Alta</span></label>
+              <label class="prioridade-option media"><input type="radio" name="addPrioridade" value="Média" checked><span>Média</span></label>
+              <label class="prioridade-option baixa"><input type="radio" name="addPrioridade" value="Baixa"><span>Baixa</span></label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-cancelar" onclick="fecharModalAdicionar()">Cancelar</button>
+            <button type="submit" class="btn btn-salvar">Adicionar Tarefa</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script src="todolist.js"></script>
+  <div class="overlay-sidebar" onclick="fecharSidebar()"></div>
+
 </body>
 </html>
