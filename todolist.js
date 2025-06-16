@@ -87,9 +87,9 @@ function atualizarTasks() {
   if (filtradas.length === 0) {
     let mensagem = `<li class="mensagem-vazio">Nenhuma tarefa encontrada.</li>`;
     if (filtroAtual === 'Hoje') {
-      mensagem = `<li class="mensagem-vazio">🎉 Nenhuma tarefa para hoje!</li>`;
+      mensagem = `<li class="mensagem-vazio">Nenhuma tarefa para hoje!</li>`;
     } else if (filtroAtual === 'Semana') {
-      mensagem = `<li class="mensagem-vazio">🗓️ Nenhuma tarefa agendada para esta semana.</li>`;
+      mensagem = `<li class="mensagem-vazio">Nenhuma tarefa agendada para esta semana.</li>`;
     }
     lista.innerHTML = mensagem;
     return;
@@ -280,6 +280,16 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('filtroHoje').addEventListener('click', () => { filtroAtual = 'Hoje'; atualizarTasks(); });
   document.getElementById('filtroSemana').addEventListener('click', () => { filtroAtual = 'Semana'; atualizarTasks(); });
   document.getElementById('filtroTodas').addEventListener('click', () => { filtroAtual = 'Todas'; atualizarTasks(); });
+
+  //Fechar menu logo apos o click em alguma opção:
+  const sidebarItems = document.querySelectorAll('.sidebar li');
+  sidebarItems.forEach(item => {
+    item.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        fecharSidebar();
+      }
+    });
+  });
 });
 
 // Funções para Sidebar em modo mobile
