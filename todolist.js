@@ -252,17 +252,20 @@ function atualizarBotoesEIconesDeTema() {
   const btnMobile = document.getElementById('temaBtnMobile');
   const logoMobile = document.getElementById('logoTopoMobile');
   const logoSidebar = document.getElementById('logoSidebar');
+  const logoSidebarOpen = document.getElementById('logoSideBarMobileOpen');
 
   if(ehEscuro) {
     btnDesktop.innerHTML = '🌙 Tema Escuro';
     btnMobile.innerHTML = '🌙';
     if(logoMobile) logoMobile.src = 'logo-branca.png';
     if(logoSidebar) logoSidebar.src = 'logo-branca.png';
+    if(logoSidebarOpen) logoSideBarMobileOpen.src = 'logo-branca.png';
   } else {
     btnDesktop.innerHTML = '☀️ Tema Claro';
     btnMobile.innerHTML = '☀️';
     if(logoMobile) logoMobile.src = 'logo.png';
     if(logoSidebar) logoSidebar.src = 'logo.png';
+     if(logoSidebarOpen) logoSideBarMobileOpen.src = 'logo.png';
   }
 }
 

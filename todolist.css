@@ -395,12 +395,13 @@ main {
     position: fixed;
     top: 0;
     left: 0;
-    width: 75%;
+    width: 65%;
     max-width: 300px;
     height: 100vh;
     transform: translateX(-100%);
   }
   .sidebar.aberta {
+    z-index: 1200;
     transform: translateX(0);
     box-shadow: 2px 0 5px rgba(0,0,0,0.5);
   }
@@ -413,7 +414,7 @@ main {
     inset: 0;
     background-color: rgba(0, 0, 0, 0.4);
     display: none;
-    z-index: 1000;
+    z-index: 1100;
   }
   .overlay-sidebar.ativa {
     display: block;
@@ -435,8 +436,10 @@ main {
 
   .topo-menu-mobile {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 5px;
+    font-weight: 600;
   }
 
   .btn-fechar-menu {
@@ -446,7 +449,6 @@ main {
     color: inherit;
     font-size: 1.5rem;
     cursor: pointer;
-    margin-top: 60px;
   }
   .btn-fechar-menu:hover {
     color: var(--cor-primaria-acao);
