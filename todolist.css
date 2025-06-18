@@ -32,7 +32,7 @@ html {
 }
 
 /* Esconde o header mobile em telas grandes */
-.main-header {
+#logoTopoMobile, #logoSideBarMobileOpen, .topo-menu-mobile, .main-header{
   display: none;
 }
 
@@ -340,6 +340,9 @@ main {
 
 /* --- RESPONSIVIDADE --- */
 @media (max-width: 768px) {
+  #logoTopoMobile, #logoSideBarMobileOpen, .topo-menu-mobile{
+  display: block;
+  }
   .tema-btn-desktop {
     display: none;
   }
