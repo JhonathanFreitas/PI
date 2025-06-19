@@ -325,8 +325,11 @@ function filtrarCategoria(categoria) { filtroAtual = categoria; atualizarTasks()
 function abrirSidebar() {
   document.querySelector('.sidebar').classList.add('aberta');
   document.querySelector('.overlay-sidebar').classList.add('ativa');
+  document.body.style.overflow = 'hidden'; // impede rolagem do fundo
 }
+
 function fecharSidebar() {
   document.querySelector('.sidebar').classList.remove('aberta');
   document.querySelector('.overlay-sidebar').classList.remove('ativa');
+  document.body.style.overflow = ''; // libera rolagem
 }
