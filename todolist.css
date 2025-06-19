@@ -462,4 +462,20 @@ main {
   }
 }
 
+.btn-vermelho {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-vermelho:hover {
+  background-color: #c9302c;
+}
+
+
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

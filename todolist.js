@@ -156,13 +156,38 @@ function formatarData(dataString, curto = false) {
 }
 
 function removerItem(index) {
-  if (confirm('Tem certeza que deseja remover esta tarefa?')) {
-    tasks.splice(index, 1);
-    salvarNoLocalStorage();
-    atualizarTasks();
-    mostrarFeedback("🗑️ Tarefa removida!");
-  }
+  const task = tasks[index];
+  const modal = document.createElement('div');
+  modal.className = 'modal-edicao';
+  modal.innerHTML = `
+    <div class="modal-overlay" onclick="this.parentElement.remove()"></div>
+    <div class="modal-conteudo">
+      <div class="modal-header">
+        <h2>Remover Tarefa</h2>
+        <button class="btn-fechar" onclick="this.closest('.modal-edicao').remove()">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 1rem; text-align: center;">
+        <p>Tem certeza que deseja remover a tarefa<br><strong>"${task.text}"</strong>?</p>
+        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center;">
+          <button class="btn btn-vermelho" onclick="confirmarRemocao(${index}, this)">Remover</button>
+          <button class="btn btn-cancelar" onclick="this.closest('.modal-edicao').remove()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  modal.style.display = 'flex';
 }
+
+
+function confirmarRemocao(index, botao) {
+  tasks.splice(index, 1);
+  salvarNoLocalStorage();
+  atualizarTasks();
+  botao.closest('.modal-edicao').remove();
+  mostrarFeedback("🗑️ Tarefa removida!");
+}
+
 
 function editarItem(index) {
   const task = tasks[index];

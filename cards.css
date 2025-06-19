@@ -1,0 +1,186 @@
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .topo-logo {
+      width: 100%; text-align: center; margin-bottom: 25px;
+    }
+    .topo-logo img { max-width: 100px; height: auto; }
+
+    /* --- NOVO LAYOUT DO DASHBOARD --- */
+    .dashboard-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 25px;
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    .widget {
+        padding: 20px;
+        border-radius: 16px;
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
+    .widget h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    /* Widget de Próximas Tarefas */
+    #proximas-tarefas-widget ul {
+        list-style: none;
+        padding: 0;
+    }
+    #proximas-tarefas-widget li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid;
+    }
+    #proximas-tarefas-widget li:last-child {
+        border-bottom: none;
+    }
+    .task-date { font-size: 0.9em; opacity: 0.8; }
+
+    /* Cards de Categoria */
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+    }
+    .card {
+      position: relative;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .card:hover { transform: translateY(-5px); }
+    .card h2 {
+      font-size: 1.3rem; margin-bottom: 10px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+
+    .progress-bar {
+      background-color: #ddd;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 20px;
+      margin-top: 10px;
+    }
+    .progress {
+      height: 100%; background-color: #4CAF50;
+      text-align: center; color: white; font-size: 0.8rem;
+      line-height: 20px; transition: width 0.5s ease-in-out;
+    }
+
+    /* Melhorias nos Cards */
+    .priority-indicator {
+        position: absolute; top: 15px; right: 15px; font-size: 1.2rem;
+    }
+    .next-task-preview {
+        margin-top: 15px; padding-top: 15px;
+        border-top: 1px solid; font-size: 0.9em;
+        opacity: 0.8;
+    }
+    .next-task-preview strong { display: block; margin-bottom: 5px; opacity: 1; }
+
+    /* Widget de Resumo */
+    #resumo-semana-widget { text-align: center; }
+    .stat-circle {
+        width: 120px; height: 120px;
+        border-radius: 50%;
+        display: flex; flex-direction: column;
+        justify-content: center; align-items: center;
+        margin: 0 auto;
+    }
+    .stat-number { font-size: 2.5rem; font-weight: bold; }
+    .stat-label { font-size: 0.9rem; }
+
+    .botao-container {
+      width: 100%; text-align: center; margin-top: 20px;
+    }
+    .btn-ir {
+      padding: 12px 24px; background-color: #C8102E; color: white;
+      border: none; border-radius: 8px; font-size: 1rem;
+      cursor: pointer; transition: background-color 0.3s, transform 0.2s;
+      text-decoration: none; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-ir:hover { background-color: #a60c25; transform: scale(1.05); }
+
+    /* --- TEMAS --- */
+    body.tema-claro { background-color: #f5f5f5; color: #333; }
+    .tema-claro .widget, .tema-claro .card {
+        background-color: white; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    .tema-claro #proximas-tarefas-widget li, .tema-claro .next-task-preview { border-color: #eee; }
+    .tema-claro .stat-circle { background-color: #e9f5ea; color: #4CAF50; }
+
+    body.tema-escuro { background-color: #121212; color: #e0e0e0; }
+    .tema-escuro .widget, .tema-escuro .card {
+        background-color: #1e1e1e; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    .tema-escuro h2, .tema-escuro h3 { color: #f0f0f0; }
+    .tema-escuro #proximas-tarefas-widget li, .tema-escuro .next-task-preview { border-color: #333; }
+    .tema-escuro .progress-bar { background-color: #444; }
+    .tema-escuro .stat-circle { background-color: #2a3d2c; color: #66bb6a; }
+
+    /* Modal de Categoria (sem alterações) */
+    .modal-categoria { position: fixed; inset: 0; display: none; justify-content: center; align-items: center; z-index: 1000; }
+    .modal-categoria.ativa { display: flex; }
+    .modal-overlay { position: absolute; inset: 0; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); }
+    .modal-conteudo { position: relative; z-index: 2; padding: 20px; border-radius: 16px; width: min(90%, 500px); max-height: 80vh; display: flex; flex-direction: column; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .modal-header h2 { margin: 0; }
+    .btn-fechar-modal { background: none; border: none; font-size: 1.8rem; cursor: pointer; color: inherit; }
+    #modalCategoriaContador { font-size: 1rem; font-weight: normal; margin-left: 10px; flex-grow: 1; text-align: left; }
+    .modal-body { overflow-y: auto; }
+    .modal-lista-tarefas { list-style: none; padding: 0; }
+    .modal-lista-tarefas li { padding: 12px; margin-bottom: 8px; border-radius: 8px; display: flex; align-items: center; gap: 10px; border-left: 6px solid transparent; }
+    .modal-lista-tarefas li.concluida { text-decoration: line-through; opacity: 0.6; }
+    .modal-lista-tarefas li.prioridade-alta { border-left-color: #ff0000; }
+    .modal-lista-tarefas li.prioridade-média { border-left-color: #ffa500; }
+    .modal-lista-tarefas li.prioridade-baixa { border-left-color: #008000; }
+    .tema-escuro .modal-lista-tarefas li.prioridade-alta { border-left-color: #ff4d4d; }
+    .tema-escuro .modal-lista-tarefas li.prioridade-média { border-left-color: #ffb84d; }
+    .tema-escuro .modal-lista-tarefas li.prioridade-baixa { border-left-color: #4dff4d; }
+    .modal-lista-tarefas input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; }
+    .modal-task-title { flex-grow: 1; }
+    .modal-task-date { font-size: 0.8rem; }
+    .tema-claro .modal-conteudo { background-color: #fdfdfd; color: #333; }
+    .tema-claro .modal-lista-tarefas li { background-color: #f0f0f0; }
+    .tema-claro .modal-task-date, .tema-claro #modalCategoriaContador { color: #6c757d; }
+    .tema-escuro .modal-conteudo { background-color: #1f1f1f; color: #e0e0e0; border: 1px solid #444; }
+    .tema-escuro .modal-lista-tarefas li { background-color: #2b2b2b; }
+    .tema-escuro .modal-task-date, .tema-escuro #modalCategoriaContador { color: #adb5bd; }
+    .botaoTema{
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.tema-btn-desktop {
+  top: 10px;
+  right: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #52525b;
+  color: white;
+  cursor: pointer;
+  z-index: 1001;
+  transition: background-color 0.3s;
+  font-size: 1rem;
+}
+.tema-btn-desktop:hover {
+  background-color: #71717a;
+}
