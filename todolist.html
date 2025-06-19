@@ -21,50 +21,54 @@
 
   <div class="container">
     <aside class="sidebar">
-      <div class="topo-menu-mobile">
-        <img src="logo.png" alt="Logo" class="logo-topo" id="logoSideBarMobileOpen">
+  <div class="sidebar-scrollable">
+    <div class="topo-menu-mobile">
+      <img src="logo.png" alt="Logo" class="logo-topo" id="logoSideBarMobileOpen">
+      <span>Avengers To-Do</span>
+      <button class="btn-fechar-menu" onclick="fecharSidebar()">✕</button>
+    </div>
+    <h2 class="logo-header">
+      <a href="cards.html" class="logo-link">
+        <img src="logo-branca.png" alt="Logo Avengers To-Do" class="logo-img" id="logoSidebar">
         <span>Avengers To-Do</span>
-        <button class="btn-fechar-menu" onclick="fecharSidebar()">✕</button>
-      </div>
-      <h2 class="logo-header">
-        <a href="cards.html" class="logo-link">
-          <img src="logo-branca.png" alt="Logo Avengers To-Do" class="logo-img" id="logoSidebar">
-          <span>Avengers To-Do</span>
-        </a>
-      </h2>
-      
-      <div class="sidebar-actions">
-        <a href="cards.html" class="sidebar-action-button"><i class="fas fa-th-large"></i> Dashboard</a>
-        <div class="search-container">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" id="buscaTarefa" placeholder="Buscar tarefas..." autocomplete="off" />
-        </div>
-      </div>
+      </a>
+    </h2>
 
-      <nav>
-        <ul>
-          <li id="filtroHoje">🗓️ Hoje</li>
-          <li id="filtroSemana">📆 Semana</li>
-          <li id="filtroTodas">🗃️ Todas</li>
-        </ul>
-      </nav>
-      <div class="category-list">
-        <h3>📂 Categorias</h3>
-        <ul>
-          <li onclick="filtrarCategoria('Estudos')">📚 Estudos</li>
-          <li onclick="filtrarCategoria('Pessoal')">🧘‍♂️ Pessoal</li>
-          <li onclick="filtrarCategoria('Trabalho')">💼 Trabalho</li>
-        </ul>
+    <div class="sidebar-actions">
+      <a href="cards.html" class="sidebar-action-button"><i class="fas fa-th-large"></i> Dashboard</a>
+      <div class="search-container">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="buscaTarefa" placeholder="Buscar tarefas..." autocomplete="off" />
       </div>
-      <div class="ordenar-por">
-        <h3>📌 Ordenar por</h3>
-        <select id="ordenarSelect" onchange="atualizarTasks()">
-          <option value="data" selected>Data</option>
-          <option value="prioridade">Prioridade</option>
-          <option value="nome">Nome</option>
-        </select>
-      </div>
-    </aside>
+    </div>
+
+    <nav>
+      <ul>
+        <li id="filtroHoje">🗓️ Hoje</li>
+        <li id="filtroSemana">📆 Semana</li>
+        <li id="filtroTodas">🗃️ Todas</li>
+      </ul>
+    </nav>
+
+    <div class="category-list">
+      <h3>📂 Categorias</h3>
+      <ul>
+        <li onclick="filtrarCategoria('Estudos')">📚 Estudos</li>
+        <li onclick="filtrarCategoria('Pessoal')">🧘‍♂️ Pessoal</li>
+        <li onclick="filtrarCategoria('Trabalho')">💼 Trabalho</li>
+      </ul>
+    </div>
+
+    <div class="ordenar-por">
+      <h3>📌 Ordenar por</h3>
+      <select id="ordenarSelect" onchange="atualizarTasks()">
+        <option value="data" selected>Data</option>
+        <option value="prioridade">Prioridade</option>
+        <option value="nome">Nome</option>
+      </select>
+    </div>
+  </div>
+</aside>
 
     <main>
       <div class="botaoTema">

@@ -6,8 +6,18 @@
       transition: background-color 0.3s, color 0.3s;
     }
     .topo-logo {
-      width: 100%; text-align: center; margin-bottom: 25px;
+      width: 100%; 
+      text-align: center; 
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 30px;
+      color: #333333;
     }
+
     .topo-logo img { max-width: 100px; height: auto; }
 
     /* --- NOVO LAYOUT DO DASHBOARD --- */
@@ -105,10 +115,11 @@
     .stat-label { font-size: 0.9rem; }
 
     .botao-container {
-      width: 100%; text-align: center; margin-top: 20px;
+      width: 100%; text-align: center; margin-top: 20px; margin-bottom: 20px;
     }
     .btn-ir {
-      padding: 12px 24px; background-color: #C8102E; color: white;
+      padding: 12px 24px 12px 24px; background-color: #C8102E; color: white;
+      margin-bottom: 20px;
       border: none; border-radius: 8px; font-size: 1rem;
       cursor: pointer; transition: background-color 0.3s, transform 0.2s;
       text-decoration: none; font-weight: 600;
@@ -132,6 +143,7 @@
     .tema-escuro #proximas-tarefas-widget li, .tema-escuro .next-task-preview { border-color: #333; }
     .tema-escuro .progress-bar { background-color: #444; }
     .tema-escuro .stat-circle { background-color: #2a3d2c; color: #66bb6a; }
+    .tema-escuro .topo-logo { color: #ffffff; }
 
     /* Modal de Categoria (sem alterações) */
     .modal-categoria { position: fixed; inset: 0; display: none; justify-content: center; align-items: center; z-index: 1000; }
@@ -183,4 +195,9 @@
 }
 .tema-btn-desktop:hover {
   background-color: #71717a;
+}
+
+@media (max-width: 768px) {
+  .topo-logo { font-size: 25px; }
+  .topo-logo img { max-width: 100px; height: 80px; }
 }

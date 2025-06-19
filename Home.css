@@ -86,7 +86,7 @@ p {
 }
 
 /* Hero */
-.hero {
+#hero {
   background-color: var(--fundo);
   width: 100%;
   padding: 0;
@@ -422,6 +422,27 @@ p {
   display: none;
 }
 
+#Topo {
+  position: fixed;
+  text-decoration: none;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  font-size: 24px;
+  background-color: #C8102E;
+  color: white;
+  border: none;
+  padding: 7px 20px 7px 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+#Topo:hover {
+  background-color: #a60c25;
+}
+
+
 @media (max-width: 768px) {
   .layout, .center{
     padding: 0;
@@ -453,8 +474,7 @@ p {
   .step-item p{text-align: start;}
   .faq-list summary{font-size: 16px;}
   .faq-list details p {font-size: 14px; padding: 0px 0px 20px 0px;}
-  .faq-list details{
-    padding: 0px 20px 0px 20px;
-  }
+  .faq-list details{padding: 0px 20px 0px 20px;}
+  #Topo{padding: 3px 15px 3px 15px;}
 
 }
