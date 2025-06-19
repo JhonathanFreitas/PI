@@ -3,7 +3,6 @@
       font-family: 'Segoe UI', sans-serif;
       height: 100vh;
       padding: 20px;
-      padding-bottom: 80px;
       transition: background-color 0.3s, color 0.3s;
     }
     .topo-logo {

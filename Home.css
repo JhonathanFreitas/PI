@@ -362,12 +362,6 @@ p {
   font-size: 32px;
 }
 
-#faq p{
-  color: var(--branco);
-  font-size: 18px;
-  margin-bottom: 40px;
-}
-
 .faq-list {
   max-width: 800px;
   margin: 40px auto 0 auto;
@@ -405,9 +399,9 @@ p {
 }
 
 .faq-list details p {
-  font-size: 16px;
+  font-size: 18px;
   text-align: center;
-  padding: 10px 0px 0px 0px;
+  padding: 20px 20px 20px 20px;
   margin: 0;
   line-height: 1.5;
 }
@@ -422,4 +416,45 @@ p {
 }
 #faq{
   quotes: 1;
+}
+
+.imgMobile{
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .layout, .center{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .person{display: none;}
+
+  .wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .logo {width: 120px;}
+  .tituloPrincipal{font-size: 30px;}
+  .bloco1{padding: 20px;}
+  .container{text-align: center;}
+  .image-column{display: none;}
+  .imgMobile{display: block; width: 100%; height: 100%; margin-bottom: 15px;}
+  .features-grid{display: block; width: 100%;}
+  .features-grid div{width: 100%; height: 200px; padding: 20px; margin-bottom: 20px;}
+  .step-number{width: 65px; height: 30px;}
+  .step-item h4{text-align: start;}
+  .step-item p{text-align: start;}
+  .faq-list summary{font-size: 16px;}
+  .faq-list details p {font-size: 14px; padding: 0px 0px 20px 0px;}
+  .faq-list details{
+    padding: 0px 20px 0px 20px;
+  }
+
 }
