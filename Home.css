@@ -1,11 +1,27 @@
-:root{
+:root {
   --vermelhoEscuro: #C8102E;
   --cinzaMetálico: #5A5A5A;
+  --azul: #0C2340;
+}
+
+body.tema-claro {
   --preto: #000000;
   --branco: #ffffff;
   --prata: #C0C0C0;
+  --fundo: #F2F2F2;
   --azul: #0C2340;
-  --fundo: #f2f2f2;
+  background-color: var(--fundo);
+  color: var(--azul);
+}
+
+body.tema-escuro {
+  --preto: #000000;
+  --branco: #ffffff;
+  --prata: #121212;
+  --fundo: #1a1a1a;
+  --fundoClaro: #1f1f1f;
+  background-color: var(--prata);
+  color: var(--preto);
 }
 
 * {
@@ -18,11 +34,35 @@ html, body {
   width: 100%;
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--prata);
   color: #1b1b1b;
   line-height: 1.6;
   overflow-x: hidden;
 }
+
+#botaoTema{
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  background: #F2F2F2;
+}
+
+body.tema-escuro #botaoTema { background: var(--fundo); }
+
+.tema-toggle {
+  top: 10px;
+  right: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #52525b;
+  color: white;
+  cursor: pointer;
+  z-index: 1001;
+  transition: background-color 0.3s;
+  font-size: 1rem;
+}
+
+.tema-toggle:hover {background-color: #71717a;}
 
 .container {
   width: 100%;
@@ -36,15 +76,10 @@ html, body {
 }
 
 /* Tipografia */
-h1, h2, h3 {
-  color: var(--azul);
-  margin-bottom: 20px;
-}
-
-p {
-  font-size: 18px;
-  color: var(--preto);
-}
+h1, h2, h3 { color: var(--azul); margin-bottom: 20px; }
+p { font-size: 18px; color: var(--preto); }
+body.tema-escuro h1, h2, h3 { color: var(--branco); }
+body.tema-escuro p { color: var(--branco); }
 
 /* Botões */
 .buttons {
@@ -79,6 +114,7 @@ p {
   border: none;
   text-decoration: underline;
 }
+body.tema-escuro .btn.segundario{ color: var(--branco); }
 
 .btn.segundario:hover {
   color: var(--vermelhoEscuro);
@@ -148,6 +184,7 @@ p {
   width: 100%;
   background-color: var(--branco);
 }
+body.tema-escuro #bloco1{ background: var(--fundoClaro);}
 
 #bloco1 .container {
   display: flex;
@@ -193,6 +230,9 @@ p {
   min-width: 45%;
 }
 
+.text-azul{ color: var(--azul); }
+body.tema-escuro .text-azul{ color: var(--branco); }
+
 #bloco2 .image-column img {
   max-width: 100%;
   height: auto;
@@ -203,6 +243,7 @@ p {
   background-color: var(--branco);
   padding: 60px 20px;
 }
+body.tema-escuro #bloco3{ background: var(--fundoClaro);}
 
 .bloco3-container {
   max-width: 1000px;
@@ -215,6 +256,8 @@ p {
   color: var(--azul);
   margin-bottom: 5px;
 }
+body.tema-escuro .bloco3-container h2{ color: var(--branco);}
+
 
 .bloco3-container p {
   font-size: 18px;
@@ -244,11 +287,14 @@ p {
   transition: all 0.3s ease;
   cursor: pointer;
 }
+body.tema-escuro .features-grid div{ background: var(--fundo); }
+
 
 .features-grid div i{
   color: var(--azul); 
   margin-right: 8px;
 }
+body.tema-escuro .features-grid div i{color: var(--vermelhoEscuro);}
 
 .features-grid div:hover {
   background-color: var(--azul);
@@ -266,6 +312,7 @@ p {
   font-weight: 700;
   margin-bottom: 10px;
 }
+body.tema-escuro .features-grid h3 { color: var(--branco) ;}
 
 .features-grid p {
   text-align: center;
@@ -326,6 +373,8 @@ p {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
+body.tema-escuro .step-item { background-color: var(--fundoClaro) }
+
 .step-number {
   width: 55px;
   height: 45px;
@@ -344,7 +393,7 @@ p {
   font-size: 18px;
   color: #1d1d1d;
 }
-
+body.tema-escuro .step-item h4{ color: var(--branco); }
 .step-item p {
   margin: 0;
   color: #555;
@@ -355,12 +404,19 @@ p {
   background-color: var(--branco);
   padding: 60px 20px;
 }
+body.tema-escuro #faq { background-color: var(--fundoClaro); }
 
 #faq h2 {
   text-align: center;
   color: var(--azul);
   font-size: 32px;
 }
+body.tema-escuro #faq h2{ color: var(--branco); }
+
+#faq .bloco5-p {
+  color: var(--preto);
+}
+body.tema-escuro #faq .bloco5-p { color: var(--branco); }
 
 .faq-list {
   max-width: 800px;
@@ -411,9 +467,7 @@ p {
   margin: 0 auto;
   text-align: center;
 }
-#faq .bloco5-p {
-  color: var(--preto);
-}
+
 #faq{
   quotes: 1;
 }
@@ -426,7 +480,7 @@ p {
   position: fixed;
   text-decoration: none;
   bottom: 20px;
-  right: 20px;
+  right: 40px;
   z-index: 1000;
   font-size: 24px;
   background-color: #C8102E;
@@ -441,7 +495,6 @@ p {
 #Topo:hover {
   background-color: #a60c25;
 }
-
 
 @media (max-width: 768px) {
   .layout, .center{

@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+  <div id="botaoTema">
+    <button id="btnTema" class="tema-toggle">🌙 Tema Escuro</button>
+  </div>
   <section id="hero">
     <div class="wrapper">
       <div class="layout">
@@ -16,7 +19,7 @@
           <img src="img-esquerda.png" alt="Homem com laptop" />
         </div>
         <div class="center">
-          <img src="logo.png" alt="Logo" class="logo" />
+          <img src="logo.png" alt="Logo" class="logo" id="logoPrincipal">
           <h1 class="tituloPrincipal">Avengers To Do</h1>
           <p class="subtitlePrincipal">Uma aplicação web para criar, gerenciar e concluir tarefas do seu dia a dia.</p>
           <div class="buttons">
@@ -38,7 +41,7 @@
         <img src="img-por-tras-do-projeto.png" alt="Mockup de tarefas" />
       </div>
       <div class="text-column">
-        <h2>Por trás do projeto</h2>
+        <h2 class="text-azul">Por trás do projeto</h2>
         <img src="img-por-tras-do-projeto.png" class="imgMobile" alt="Mockup de tarefas" />
         <p>Este projeto foi desenvolvido por estudantes do 3º período de Ciência da Computação como parte do Projeto Integrador. Nosso objetivo foi aplicar na prática os conhecimentos adquiridos em sala de aula, utilizando HTML, CSS e JavaScript para criar uma aplicação web funcional, intuitiva e útil para o dia a dia.<br><br>
           Durante o processo, trabalhamos em equipe, enfrentamos desafios reais de desenvolvimento, aprimoramos nossas habilidades técnicas e aprendemos mais sobre design centrado no usuário, usabilidade e boas práticas de programação.<br><br>
@@ -54,7 +57,7 @@
         <img src="por-que-criamos-o-avengers-to-do.png" alt="Imagem de produtividade" />
       </div>
       <div class="text-column">
-        <h2>Por que criamos o Avengers To Do</h2>
+        <h2 class="text-azul">Por que criamos o Avengers To Do</h2>
         <img src="por-que-criamos-o-avengers-to-do.png" class="imgMobile" alt="Imagem de produtividade" />
         <p>Organizar tarefas pode parecer simples, mas nem sempre é fácil manter tudo sob controle. Por isso, desenvolvemos esta aplicação como parte do nosso Projeto Integrador, unindo prática e propósito.<br><br>
           Mais do que exercitar os conhecimentos técnicos em programação, nosso objetivo foi criar uma solução real, acessível e funcional — algo que realmente ajude no dia a dia, seja para acompanhar estudos, compromissos pessoais ou atividades do trabalho.</p>
@@ -87,7 +90,7 @@
         <img src="img-como-funciona.png" alt="Imagem de produtividade" />
       </div>
       <div class="text-column">
-        <h2>Como funciona o Avengers To Do?</h2>
+        <h2 class="text-azul">Como funciona o Avengers To Do?</h2>
         <img src="img-como-funciona.png" class="imgMobile" alt="Imagem de produtividade" />
         <p>Em poucos passos, você transforma tarefas soltas em uma rotina organizada e produtiva. Descubra como é simples começar a organizar sua rotina com o Avengers To Do.</p>
         <div class="steps-list">
@@ -154,7 +157,8 @@
     </div>
   </section>
   <section>
-    <a href="#hero" id="Topo">&#11105;</a>
+    <a href="#botaoTema" id="Topo">&#11105;</a>
   </section>
 </body>
+<script src="home.js"></script>
 </html>

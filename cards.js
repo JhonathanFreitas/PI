@@ -33,14 +33,8 @@
 
     function renderizarResumoSemana(tasks) {
         const numeroEl = document.getElementById('resumo-semana-numero');
-        const hoje = new Date();
-        const seteDiasAtras = new Date(hoje.setDate(hoje.getDate() - 7));
-
-        const concluidasNaSemana = tasks.filter(t => {
-            return t.completed && t.data && new Date(t.data) >= seteDiasAtras;
-        }).length;
-        
-        numeroEl.textContent = concluidasNaSemana;
+        const concluidas = tasks.filter(t => t.completed).length;
+        numeroEl.textContent = concluidas;
     }
 
     function renderizarCards(tasks) {
