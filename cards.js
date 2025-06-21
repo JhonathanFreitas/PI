@@ -13,23 +13,31 @@
 
     // --- Funções de Renderização do Dashboard ---
     function renderizarProximasTarefas(tasks) {
-        const listaEl = document.getElementById('proximas-tarefas-lista');
-        listaEl.innerHTML = '';
-        const proximas = tasks
-            .filter(t => !t.completed && t.data)
-            .sort((a, b) => new Date(a.data) - new Date(b.data))
-            .slice(0, 3);
+    const listaEl = document.getElementById('proximas-tarefas-lista');
+    listaEl.innerHTML = '';
 
-        if (proximas.length === 0) {
-            listaEl.innerHTML = '<li>Nenhuma tarefa com data marcada.</li>';
-            return;
-        }
-        proximas.forEach(task => {
-            const li = document.createElement('li');
-            li.innerHTML = `<span>${task.text} (${task.categoria})</span> <span class="task-date">${formatarData(task.data)}</span>`;
-            listaEl.appendChild(li);
-        });
+    let proximas = tasks
+        .filter(t => !t.completed && t.data)
+        .sort((a, b) => new Date(a.data) - new Date(b.data));
+
+    if (proximas.length < 3) {
+        const restantes = tasks
+            .filter(t => !t.completed && !t.data)
+            .slice(0, 3 - proximas.length);
+        proximas = proximas.concat(restantes);
     }
+
+    if (proximas.length === 0) {
+        listaEl.innerHTML = '<li>Nenhuma tarefa pendente encontrada.</li>';
+        return;
+    }
+
+    proximas.forEach(task => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${task.text} (${task.categoria})</span> <span class="task-date">${formatarData(task.data)}</span>`;
+        listaEl.appendChild(li);
+    });
+}
 
     function renderizarResumoSemana(tasks) {
         const numeroEl = document.getElementById('resumo-semana-numero');
@@ -58,10 +66,13 @@
             const concluidas = categoria.tasks.filter(t => t.completed).length;
             const percentual = total > 0 ? (concluidas / total) * 100 : 0;
             const temPrioridadeAlta = categoria.tasks.some(t => !t.completed && t.prioridade === 'Alta');
-            const proximaTarefa = categoria.tasks
-                .filter(t => !t.completed && t.data)
-                .sort((a, b) => new Date(a.data) - new Date(b.data))[0];
+            let proximaTarefa = categoria.tasks
+    .filter(t => !t.completed && t.data)
+    .sort((a, b) => new Date(a.data) - new Date(b.data))[0];
 
+if (!proximaTarefa) {
+    proximaTarefa = categoria.tasks.find(t => !t.completed);
+}
             const cardHTML = `
                 <div class="card" onclick="abrirModalCategoria('${nomeCategoria}')">
                     ${temPrioridadeAlta ? '<span class="priority-indicator">🔥</span>' : ''}
