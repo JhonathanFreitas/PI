@@ -480,16 +480,21 @@ body.tema-escuro #faq .bloco5-p { color: var(--branco); }
   position: fixed;
   text-decoration: none;
   bottom: 20px;
-  right: 40px;
-  z-index: 1000;
-  font-size: 24px;
-  background-color: #C8102E;
-  color: white;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: #c8102e; /* vermelho semelhante ao da imagem */
   border: none;
-  padding: 7px 20px 7px 20px;
   border-radius: 50%;
+  color: white;
+  font-size: 20px;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: background-color 0.3s ease;
 }
 
 #Topo:hover {
@@ -528,6 +533,6 @@ body.tema-escuro #faq .bloco5-p { color: var(--branco); }
   .faq-list summary{font-size: 16px;}
   .faq-list details p {font-size: 14px; padding: 0px 0px 20px 0px;}
   .faq-list details{padding: 0px 20px 0px 20px;}
-  #Topo{width: 53px; bottom: 20px; right: 20px;}
+  #Topo{bottom: 20px; right: 20px;}
 
 }
