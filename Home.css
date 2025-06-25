@@ -528,6 +528,6 @@ body.tema-escuro #faq .bloco5-p { color: var(--branco); }
   .faq-list summary{font-size: 16px;}
   .faq-list details p {font-size: 14px; padding: 0px 0px 20px 0px;}
   .faq-list details{padding: 0px 20px 0px 20px;}
-  #Topo{padding: 20;}
+  #Topo{padding: 20px;}
 
 }
